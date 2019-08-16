@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="cn.practice.employee.domain.Department" table="department">
+		<id name="did" column="did">
+			<generator class="native"/>
+		</id>
+		
+		<property name="dname" column="dname" length="20"/>
+		<property name="ddesc" column="ddesc" length="100"/>
+		
+		<!-- 和员工的关联关系(一个部门对应多个员工SET) -->
+		<set name="employees" cascade="delete" inverse="true">
+			<key column="dno"/>
+			<one-to-many class="cn.practice.employee.domain.Employee"/>
+		</set>
+	</class>
+</hibernate-mapping>
